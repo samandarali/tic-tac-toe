@@ -57,7 +57,7 @@ const updateSymbolDisplays = () => {
     }
 };
 
-const clearEffects = () => {
+const clearEffects = (skipComputerAudio = false) => {
     if (effectTimeoutId) {
         clearTimeout(effectTimeoutId);
         effectTimeoutId = null;
