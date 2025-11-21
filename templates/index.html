@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="container">
+        <h1>Tic-Tac-Toe</h1>
+
+        <section class="controls">
+            <div class="symbol-picker">
+                <label for="symbolSelect">Pick your symbol:</label>
+                <select id="symbolSelect">
+                    <option value="X">X</option>
+                    <option value="O">O</option>
+                </select>
+                <button id="startButton" type="button">Start Game</button>
+            </div>
+            <button id="resetButton" type="button" class="secondary">Reset Board</button>
+        </section>
+
+        <div class="symbol-display">
+            <div class="symbol-card">
+                <p class="label">You</p>
+                <p id="playerDisplay" class="symbol-value">X</p>
+            </div>
+            <div class="symbol-card">
+                <p class="label">Computer</p>
+                <p id="computerDisplay" class="symbol-value">O</p>
+            </div>
+        </div>
+
+        <section class="board" id="board">
+            {% for position in range(1, 10) %}
+            <button class="cell" data-position="{{ position }}"></button>
+            {% endfor %}
+        </section>
+
+        <p class="status" id="statusMessage">Make your move!</p>
+        <p class="error" id="errorMessage" aria-live="polite"></p>
+
+        <div id="diceModal" class="dice-modal" style="display: none;">
+            <div class="dice-content">
+                <h2>Who Goes First?</h2>
+                <div class="dice-rolls">
+                    <div class="dice-result">
+                        <p class="dice-label">Player</p>
+                        <div class="dice" id="playerDice">?</div>
+                    </div>
+                    <div class="dice-result">
+                        <p class="dice-label">Computer</p>
+                        <div class="dice" id="computerDice">?</div>
+                    </div>
+                </div>
+                <button id="rollDiceButton" type="button" class="roll-button">Roll</button>
+                <p id="diceResult" class="dice-result-text"></p>
+                <audio id="diceRollAudio" src="/static/sounds/dice-roll.mp3"></audio>    
+            </div>
+        </div>
+
+        <div id="effectsContainer" class="effects-container" aria-hidden="true"></div>
+        <audio
+            id="playerWinAudio"
+            preload="auto"
+            src="{{ url_for('static', filename='sounds/champions-victory-winner-background-music-414706.mp3') }}"
+        ></audio>
+        <audio
+            id="computerWinAudio"
+            preload="auto"
+            src="{{ url_for('static', filename='sounds/y-funny-cartoon-background-music-390026.mp3') }}"
+        ></audio>
+        <audio
+            id="happyKidsAudio"
+            preload="auto"
+            src="{{ url_for('static', filename='sounds/happy-kids-333364.mp3') }}"
+        ></audio>
+        <audio
+            id="tieAudio"
+            preload="auto"
+            src="{{ url_for('static', filename='sounds/comedy-funny-cartoon-background-music-390026.mp3') }}"
+        ></audio>
+    </main>
+
+    <script src="{{ url_for('static', filename='game.js') }}" defer></script>
+</body>
+</html>
